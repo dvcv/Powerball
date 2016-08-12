@@ -87,7 +87,7 @@ winnings=sum.5w.1r*GRANDPRIZE+sum.5w*1000000+sum.4w.1r*50000+sum.4w*100+sum.3w.1
 
 **Winning Tickets**
 
-For a list of all winning tickets please contact owner at 760-574-4503 or use the attched code below.
+For a list of all winning tickets go to appendix below.
 ```{r echo=FALSE, results='hide',message=FALSE}
  ## **Winning Tickets** 
 for(i in 1:length(win.ticket)){
@@ -229,6 +229,10 @@ cat(  " You spent $", as.integer(2*n),"and won $", as.integer(winnings),"", "\n"
       "You got Powerball             ", sum.1r, "time(s)."
       )
 ```
-
-
+ 
+ **Appendix** 
+ List of all winning tickets.
+```{r, echo=FALSE}
+win.ticket
+```
 **do to the way the code was written duplicate tickets are possible but highly unlikely
