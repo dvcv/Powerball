@@ -210,7 +210,7 @@ barplot(x,las=2,names.arg=c("5W 1R","5W","4W 1R","4W","3W 1R","3W","2W 1R","1W 1
 
 ```
 ```{r, echo=FALSE}
-barplot(c(2*n,winnings,abs(2*n-winnings)),col=c(44:46),names.arg=c("Spent on Tickets","Won","Difference"),ylab="Money")
+barplot(c(2*n,winnings,abs(2*n-winnings)),col=c(44:46),names.arg=c("Spent on Tickets","Won","Lost"),ylab="Money")
 ```
 
  **Summary** 
