@@ -1,0 +1,234 @@
+---
+title: "Powerball"
+author: "David"
+date: "January 21, 2016"
+output: pdf_document
+---
+```{r, echo=FALSE}
+n=as.integer(10000) ## Change the amount of tickets bought here
+
+```
+##WHY MILLIONAIRES DO NOT PLAY POWERBALL
+This is a simple powerball simulater representing ONE single game of powerball where many quick pick tickets were bought.  (<http://www.powerball.com/pb_home.asp>).
+
+```{r, echo=FALSE}
+GRANDPRIZE=as.integer(60000000) #Change grand prize here
+```
+**Grand Prize** 
+
+`r GRANDPRIZE`
+
+**Winning Ticket** 
+```{r, echo=FALSE}
+winning.ticket=c(sort(sample(69,5)),sample(26,1))
+winning.ticket
+ticket=NULL
+ticket=list(ticket)
+
+powerball=rep(1:26,ceiling(n/26)+1)
+#for (i in 1:n){ 
+#  ticket[[i]]= c(sort(sample(69,5)),powerball[i])
+#}
+for (i in 1:n){ 
+  ticket[[i]]= c(sort(sample(69,5)),sample(26,1))
+}
+sum.5w.1r=0
+sum.5w=0
+sum.4w.1r=0
+sum.4w=0
+sum.3w.1r=0
+sum.3w=0
+sum.2w.1r=0
+sum.1w.1r=0
+sum.1r=0
+win.ticket=NULL
+win.ticket=list(win.ticket)
+for(i in 1:n){
+if (sum(ticket[[i]]==winning.ticket)==6){
+      sum.5w.1r=sum.5w.1r+1
+    win.ticket[[i]]=ticket[[i]]}
+    else if(sum(ticket[[i]][1:5]==winning.ticket[1:5])==5){
+      sum.5w=sum.5w+1
+    win.ticket[[i]]=ticket[[i]]}
+    else if(sum(ticket[[i]][1:5]%in%winning.ticket[1:5])==4 && sum(ticket[[i]][6]==winning.ticket[6])==1){
+      sum.4w.1r=sum.4w.1r+1
+    win.ticket[[i]]=ticket[[i]]}
+    else if(sum(ticket[[i]][1:5]%in%winning.ticket[1:5])==4){
+      sum.4w=sum.4w+1
+    win.ticket[[i]]=ticket[[i]]}
+    else if(sum(ticket[[i]][1:5]%in%winning.ticket[1:5])==3 && sum(ticket[[i]][6]==winning.ticket[6])==1){
+      sum.3w.1r=sum.3w.1r+1
+    win.ticket[[i]]=ticket[[i]]}
+    else if(sum(ticket[[i]][1:5]%in%winning.ticket[1:5])==3){
+      sum.3w=sum.3w+1
+    win.ticket[[i]]=ticket[[i]]}
+    else if(sum(ticket[[i]][1:5]%in%winning.ticket[1:5])==2 && sum(ticket[[i]][6]==winning.ticket[6])==1){
+      sum.2w.1r=sum.2w.1r+1
+    win.ticket[[i]]=ticket[[i]]}
+    else if(sum(ticket[[i]][1:5]%in%winning.ticket[1:5])==1 && sum(ticket[[i]][6]==winning.ticket[6])==1){
+      sum.1w.1r=sum.1w.1r+1
+    win.ticket[[i]]=ticket[[i]]}
+    else if(sum(ticket[[i]][6]==winning.ticket[6])==1){
+      sum.1r=sum.1r+1
+    win.ticket[[i]]=ticket[[i]]
+    }
+}
+win.ticket=split(unlist(win.ticket), ceiling(seq_along(unlist(win.ticket))/6))
+winnings=sum.5w.1r*GRANDPRIZE+sum.5w*1000000+sum.4w.1r*50000+sum.4w*100+sum.3w.1r*100+sum.3w*7+sum.2w.1r*7+sum.1w.1r*4+sum.1r*4
+```
+   
+   The last number represents the powerball. First 5 numbers are white balls ordered from least to greatest.
+   
+   
+ **Tickets Bought** 
+   
+    `r as.integer(n)`
+
+
+**Winning Tickets**
+
+For a list of all winning tickets please contact owner at 760-574-4503 or use the attched code below.
+```{r echo=FALSE, results='hide',message=FALSE}
+ ## **Winning Tickets** 
+for(i in 1:length(win.ticket)){
+  if (sum(win.ticket[[i]]==winning.ticket)==6)
+    print(paste(win.ticket[i],"5 Whites + Powerball Matched ($Grand Prize)"))
+  
+  else if(sum(win.ticket[[i]][1:5]==winning.ticket[1:5])==5)
+    print(paste(win.ticket[i],"5 Whites Matched ($1,000,000"))
+  
+  else if(sum(win.ticket[[i]]%in%winning.ticket[1:5])==4 && sum(ticket[[i]][6]==winning.ticket[6])==1)
+    print(paste(win.ticket[i],"4 Whites + Powerball Matched ($50,000)"))
+  
+  else if(sum(win.ticket[[i]][1:5]%in%winning.ticket[1:5])==4)
+    print(paste(win.ticket[i],"4 Whites Matched ($100)"))
+    
+  else if(sum(win.ticket[[i]][1:5]%in%winning.ticket[1:5])==3 && sum(ticket[[i]][6]==winning.ticket[6])==1)
+    print(paste(win.ticket[i],"3 Whites + Powerball Matched ($100)"))
+  
+else if(sum(win.ticket[[i]][1:5]%in%winning.ticket[1:5])==2 && sum(ticket[[i]][6]==winning.ticket[6])==1)
+    print(paste(win.ticket[i],"2 Whites + Powerball Matched ($7)"))  
+    
+  else if(sum(win.ticket[[i]][1:5]%in%winning.ticket[1:5])==3)
+    print(paste(win.ticket[i],"3 Whites Matched ($7)"))
+    
+  else if(sum(win.ticket[[i]][1:5]%in%winning.ticket[1:5])==1 && sum(ticket[[i]][6]==winning.ticket[6])==1)
+    print(paste(win.ticket[i],"1 White + Powerball Matched ($4)"))
+    
+  else if(sum(win.ticket[[i]][6]==winning.ticket[6])==1)
+    print(paste(win.ticket[i],"Power Ball Matched ($4)"))
+}
+```
+
+
+
+**Best Ticket**
+```{r, echo=FALSE}
+win.ticket2=win.ticket
+for(i in 1:length(win.ticket2)){
+  if (sum(win.ticket2[[i]]==winning.ticket)==6)
+    win.ticket2[[i]][7]=9+100
+  else if(sum(win.ticket2[[i]][1:5]==winning.ticket[1:5])==5)
+    win.ticket2[[i]][7]=8+100  
+  else if(sum(win.ticket2[[i]]%in%winning.ticket[1:5])==4 && sum(win.ticket2[[i]][6]==winning.ticket[6])==1)
+    win.ticket2[[i]][7]=7+100
+  else if(sum(win.ticket2[[i]][1:5]%in%winning.ticket[1:5])==4)
+    win.ticket2[[i]][7]=6+100
+  else if(sum(win.ticket2[[i]][1:5]%in%winning.ticket[1:5])==3 && sum(win.ticket2[[i]][6]==winning.ticket[6])==1)
+    win.ticket2[[i]][7]=5+100
+  else if(sum(win.ticket2[[i]][1:5]%in%winning.ticket[1:5])==3)
+    win.ticket2[[i]][7]=3+100
+  else if(sum(win.ticket2[[i]][1:5]%in%winning.ticket[1:5])==2 && sum(win.ticket2[[i]][6]==winning.ticket[6])==1)
+    win.ticket2[[i]][7]=4+100
+  else if(sum(win.ticket2[[i]][1:5]%in%winning.ticket[1:5])==1 && sum(win.ticket2[[i]][6]==winning.ticket[6])==1)
+    win.ticket2[[i]][7]=2+100
+  else if(sum(win.ticket2[[i]][6]==winning.ticket[6])==1)
+    win.ticket2[[i]][7]=1+100
+}
+po=unlist(win.ticket2)
+names(po)=NULL
+best.ticket=which(po[seq(7,length(win.ticket2)*7,by=7)]==max(po[seq(7,length(win.ticket2)*7,by=7)]))[1]
+
+best.ticket=win.ticket[[best.ticket]]
+la=TRUE
+while(la){
+       if (sum(best.ticket==winning.ticket)==6){
+    print(cat(best.ticket,"     5 Whites + Powerball Matched ($Grand Prize)"))
+         print(break)
+       }
+       if(sum(best.ticket[1:5]==winning.ticket[1:5])==5){ 
+    print(cat(best.ticket,"     5 Whites Matched ($1,000,000"))
+         print(break)
+       }
+       if(sum(best.ticket%in%winning.ticket[1:5])==4 && sum(best.ticket[6]==winning.ticket[6])==1){ 
+    print(cat(best.ticket,"     4 Whites + Powerball Matched ($50,000)"))
+         print(break)
+       }
+       if(sum(best.ticket[1:5]%in%winning.ticket[1:5])==4){ 
+    print(cat(best.ticket,"     4 Whites Matched ($100)"))
+         print(break)
+       }
+       if(sum(best.ticket[1:5]%in%winning.ticket[1:5])==3 && sum(best.ticket[6]==winning.ticket[6])==1){ 
+    print(cat(best.ticket,"     3 Whites + Powerball Matched ($100)"))
+         print(break)
+       }
+       if(sum(best.ticket[1:5]%in%winning.ticket[1:5])==2 && sum(best.ticket[6]==winning.ticket[6])==1){ 
+    print(cat(best.ticket,"     2 Whites + Powerball Matched ($7)"))
+         print(break)
+       }
+       if(sum(best.ticket[1:5]%in%winning.ticket[1:5])==3){
+          cat(best.ticket,"     3 Whites Matched ($7)")
+         print(break)
+       }
+       if(sum(best.ticket[1:5]%in%winning.ticket[1:5])==1 && sum(best.ticket[6]==winning.ticket[6])==1){ 
+    print(cat(best.ticket,"     1 White + Powerball Matched ($4)"))
+         print(break)
+       }
+       if(sum(best.ticket[6]==winning.ticket[6])==1){ 
+    print(cat(best.ticket,"     Power Ball Matched ($4)"))
+         print(break)
+         
+       }
+  
+}
+```
+
+
+
+```{r, echo=FALSE}
+x=c(sum.5w.1r,sum.5w,sum.4w.1r,sum.4w,sum.3w.1r,sum.3w,sum.2w.1r,sum.1w.1r,sum.1r,length(win.ticket))
+barplot(x,las=2,names.arg=c("5W 1R","5W","4W 1R","4W","3W 1R","3W","2W 1R","1W 1R","  1R","Total"),col=rainbow(10),main=paste(n,"Lottery Tickets"),ylab="Winning Tickets")
+
+```
+```{r, echo=FALSE}
+y=c("Grand Prize","1,000,000","50,000","100","100","7","7","4","4","Total")
+
+
+x=c(sum.5w.1r*GRANDPRIZE, sum.5w*1000000, sum.4w.1r*50000, sum.4w*100,sum.3w.1r*100, sum.3w*7, sum.2w.1r*7, sum.1w.1r*4, sum.1r*4,winnings)
+barplot(x,las=2,names.arg=c("5W 1R","5W","4W 1R","4W","3W 1R","3W","2W 1R","1W 1R","1R","Total"),col=rainbow(10),main=paste(n,"Lottery Tickets"),ylab="Money Won")
+
+
+```
+```{r, echo=FALSE}
+barplot(c(2*n,winnings,abs(2*n-winnings)),col=c(44:46),names.arg=c("Spent on Tickets","Won","Difference"),ylab="Money")
+```
+
+ **Summary** 
+```{r, echo=FALSE}
+cat(  " You spent $", as.integer(2*n),"and won $", as.integer(winnings),"", "\n",
+      as.integer(length(win.ticket)), "out of", n , "tickets were winners.","\n",
+      "You lost $", (2*n)-winnings,"(if negative you won!!).","\n","\n",
+      "You got 5 White + Powerball   ", sum.5w.1r, "time(s).","\n",
+      "You got 5 White               ", sum.5w, "time(s).","\n",
+      "You got 4 White + Powerball   ", sum.4w.1r, "time(s).","\n",
+      "You got 4 White               ", sum.4w, "time(s),","\n",
+      "You got 3 White + Powerball   ", sum.3w.1r, "time(s).","\n",
+      "You got 3 White               ", sum.3w, "time(s),","\n",
+      "You got 2 White + Powerball   ", sum.2w.1r, "time(s).","\n",
+      "You got 1 White + Powerball   ", sum.1w.1r, "time(s).","\n",
+      "You got Powerball             ", sum.1r, "time(s)."
+      )
+```
+
+
+**do to the way the code was written duplicate tickets are possible but highly unlikely
