@@ -197,7 +197,7 @@ while(la){
 
 ```{r, echo=FALSE}
 x=c(sum.5w.1r,sum.5w,sum.4w.1r,sum.4w,sum.3w.1r,sum.3w,sum.2w.1r,sum.1w.1r,sum.1r,length(win.ticket))
-barplot(x,las=2,names.arg=c("5W 1R","5W","4W 1R","4W","3W 1R","3W","2W 1R","1W 1R","  1R","Total"),col=rainbow(10),main=paste(n,"Lottery Tickets"),ylab="Winning Tickets")
+barplot(x,las=2,names.arg=c("5W 1R","5W","4W 1R","4W","3W 1R","3W","2W 1R","1W 1R","  1R","Total"),col=rainbow(10),main=paste("Winning Tickets"),ylab="Winning Tickets")
 
 ```
 ```{r, echo=FALSE}
@@ -205,7 +205,7 @@ y=c("Grand Prize","1,000,000","50,000","100","100","7","7","4","4","Total")
 
 
 x=c(sum.5w.1r*GRANDPRIZE, sum.5w*1000000, sum.4w.1r*50000, sum.4w*100,sum.3w.1r*100, sum.3w*7, sum.2w.1r*7, sum.1w.1r*4, sum.1r*4,winnings)
-barplot(x,las=2,names.arg=c("5W 1R","5W","4W 1R","4W","3W 1R","3W","2W 1R","1W 1R","1R","Total"),col=rainbow(10),main=paste(n,"Lottery Tickets"),ylab="Money Won")
+barplot(x,las=2,names.arg=c("5W 1R","5W","4W 1R","4W","3W 1R","3W","2W 1R","1W 1R","1R","Total"),col=rainbow(10),main=paste("Ticket Winnings"),ylab="Money Won")
 
 
 ```
