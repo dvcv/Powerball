@@ -1,8 +1,9 @@
 # Powerball
 I created this repository to show people why playing Powerball is not a smart investment. I did this by creating a simple simulation in R. 
 
-Here you will find three folders. Eash one contains a pdf and Rmd files.
+Here you will find four folders. 
 
+App: Contains an interactive app that was created with Shiny
 Powerball1: Why millionaires do not play powerball    
   -Powerball1.pdf  
   -Powerball1.Rmd  
