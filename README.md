@@ -3,14 +3,14 @@ I created this repository to show people why playing Powerball is not a smart in
 
 Here you will find four folders. 
 
-App: Contains an interactive app that was created with Shiny  
-Powerball1: Why millionaires do not play powerball    
+1. App: Contains an interactive app that was created with Shiny  
+2. Powerball1: Why millionaires do not play powerball    
   -Powerball1.pdf  
   -Powerball1.Rmd  
-Powerball2: Why you should not gamble on powerball   
+3. Powerball2: Why you should not gamble on powerball   
   -Powerball2.pdf  
   -Powerball2.Rmd  
-Powerball3: Why powerball ticket (1,2,3,4,5,+6) has the same odds as a quickpick    
+4. Powerball3: Why powerball ticket (1,2,3,4,5,+6) has the same odds as a quickpick    
   -Powerball3.pdf  
   -Powerball3.Rmd  
   
