@@ -102,6 +102,7 @@ barplot(c(2*n,winnings,abs(2*n-winnings)),col=c(44:46),names.arg=c("Spent on Tic
  
   **Best Ticket**
 ```{r, echo=FALSE}
+x=c(sum.5w.1r,sum.5w,sum.4w.1r,sum.4w,sum.3w.1r,sum.3w,sum.2w.1r,sum.1w.1r,sum.1r)
 best.ticket=x
 q=best.ticket[7]
 w=best.ticket[6]
