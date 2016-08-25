@@ -14,7 +14,7 @@ Here you will find four folders.
   -Powerball3.pdf  
   -Powerball3.Rmd  
   
-Pdf files contain my output from the Rmd files. If you would like to run your own simulation using my code open the Rmd files. Make sure you also have R Studio intstalled on your computer. Or you can check out the link in the App folder to an interactive simimulator.   
+Pdf files contain my output from the Rmd files. If you would like to run your own simulation using my code open the Rmd files. Make sure you also have R Studio intstalled on your computer. Or you can check out the link in the App folder to use an interactive simimulator.   
 -dvcv
 
 
