@@ -3,7 +3,8 @@ ui <- fluidPage(
   headerPanel("Powerball"),
   textOutput("intro"),
   textOutput("howManyTickets"),
-  sliderInput("tickets", "Games", 1, 5200, 500),
+  sliderInput("tickets", "Games", 1, 10400, 1000,5),
+  actionButton("play", "Play"),
   plotOutput("plot1"),
   plotOutput("plot2"),
   plotOutput("plot3"),
@@ -24,6 +25,10 @@ server <- function(input, output, session) {
   
   output$howManyTickets = renderText(
     print("How many games of powerball do you wish to play?"))
+  
+  play <- eventReactive(input$play, {
+    input$tickets
+  })
   GRANDPRIZE=60000000
   win.ticket=0
   winnings=0
@@ -37,8 +42,9 @@ server <- function(input, output, session) {
   sum.1w.1r=0
   sum.1r=0
   
+  
   data = reactive({
-    n = input$tickets
+    n = play()
     winning.ticket=0
     winning.ticket=list(winning.ticket)
     for (i in 1:n){ 
@@ -108,7 +114,9 @@ server <- function(input, output, session) {
   
   output$plot1 = renderPlot({
     data()
-    x=c(sum.5w.1r,sum.5w,sum.4w.1r,sum.4w,sum.3w.1r,sum.3w,sum.2w.1r,sum.1w.1r,sum.1r,length(win.ticket)-1)
+    length(win.ticket)
+    x=c(sum.5w.1r,sum.5w,sum.4w.1r,sum.4w,sum.3w.1r,sum.3w,sum.2w.1r,sum.1w.1r,sum.1r)
+    x=c(x,sum(x))
     barplot(x,las=2,names.arg=c("5W 1R","5W","4W 1R","4W","3W 1R","3W","2W 1R","1W 1R","1R","Total"),col=rainbow(10),main=paste("Winning Tickets"),ylab="Winning Tickets")
   })
   
@@ -121,7 +129,7 @@ server <- function(input, output, session) {
   
   output$plot3 = renderPlot({
     data()
-    n = input$tickets
+    n = play()
     barplot(c(2*n,winnings,abs(2*n-winnings)),col=c(44:46),names.arg=c("Spent on Tickets","Won","Lost"),ylab="Money")
   })
   
@@ -181,10 +189,13 @@ server <- function(input, output, session) {
   
   output$text2 = renderPrint({
     data()
-    n = input$tickets
-    cat(  "In your lifetime you spent $", as.integer(2*n),"and won $", as.integer(winnings),"", "\n",
-          "From the",  n , "ticket(s) you purchased", as.integer(length(win.ticket)-1), "tickets were winners.","\n",
-          "You lost $", (2*n)-winnings,"(if negative you won!!).","\n","\n",
+    x=c(sum.5w.1r,sum.5w,sum.4w.1r,sum.4w,sum.3w.1r,sum.3w,sum.2w.1r,sum.1w.1r,sum.1r)
+    x=c(sum(x))
+    n = play()
+    if(as.integer((2*n)-winnings)>=0){
+    cat(  "In your lifetime you spent $", as.integer(2*n),"and won $", as.integer(winnings),"", ".\n",
+          "From the",  n , "ticket(s) you purchased", x, "ticket(s) were winners.","\n",
+          "You lost $", (2*n)-winnings,".","\n","\n",
           "You got 5 White + Powerball   ", sum.5w.1r, "time(s).","\n",
           "You got 5 White               ", sum.5w, "time(s).","\n",
           "You got 4 White + Powerball   ", sum.4w.1r, "time(s).","\n",
@@ -193,8 +204,24 @@ server <- function(input, output, session) {
           "You got 3 White               ", sum.3w, "time(s),","\n",
           "You got 2 White + Powerball   ", sum.2w.1r, "time(s).","\n",
           "You got 1 White + Powerball   ", sum.1w.1r, "time(s).","\n",
-          "You got Powerball             ", sum.1r, "time(s)."
-    )
+          "You got only Powerball             ", sum.1r, "time(s)."
+      )
+    }else{
+      cat(  "In your lifetime you spent $", as.integer(2*n),"and won $", as.integer(winnings),"", ".\n",
+            "From the",  n , "ticket(s) you purchased", x, "ticket(s) were winners.","\n",
+            "You won $", -((2*n)-winnings),".","\n","\n",
+            "You got 5 White + Powerball   ", sum.5w.1r, "time(s).","\n",
+            "You got 5 White               ", sum.5w, "time(s).","\n",
+            "You got 4 White + Powerball   ", sum.4w.1r, "time(s).","\n",
+            "You got 4 White               ", sum.4w, "time(s),","\n",
+            "You got 3 White + Powerball   ", sum.3w.1r, "time(s).","\n",
+            "You got 3 White               ", sum.3w, "time(s),","\n",
+            "You got 2 White + Powerball   ", sum.2w.1r, "time(s).","\n",
+            "You got 1 White + Powerball   ", sum.1w.1r, "time(s).","\n",
+            "You got only Powerball             ", sum.1r, "time(s)."
+      )
+      
+    }
   })
   
 }
