@@ -5,6 +5,7 @@ ui <- fluidPage(
   textOutput("howManyTickets"),
   sliderInput("tickets", "Games", 1, 10400, 1000,5),
   actionButton("play", "Play"),
+  plotOutput("plot"),
   plotOutput("plot1"),
   plotOutput("plot2"),
   plotOutput("plot3"),
@@ -112,25 +113,32 @@ server <- function(input, output, session) {
    
   })
   
+  output$plot = renderPlot({
+    data()
+    x=c(sum.5w.1r,sum.5w,sum.4w.1r,sum.4w,sum.3w.1r,sum.3w,sum.2w.1r,sum.1w.1r,sum.1r)
+    x = sum(x)
+    barplot(c(x,play()-x),main = "Win Loss Comparison", names.arg = c("Winning Tickets", "Losing Tickets"), las = 1, col=rainbow(7))
+    
+  })
+  
   output$plot1 = renderPlot({
     data()
-    length(win.ticket)
     x=c(sum.5w.1r,sum.5w,sum.4w.1r,sum.4w,sum.3w.1r,sum.3w,sum.2w.1r,sum.1w.1r,sum.1r)
     x=c(x,sum(x))
-    barplot(x,las=2,names.arg=c("5W 1R","5W","4W 1R","4W","3W 1R","3W","2W 1R","1W 1R","1R","Total"),col=rainbow(10),main=paste("Winning Tickets"),ylab="Winning Tickets")
+    barplot(x,las=2,names.arg=c("5W 1R","5W","4W 1R","4W","3W 1R","3W","2W 1R","1W 1R","1R","Total"),col=rainbow(9),main=paste("Winning Tickets"),ylab="Winning Tickets")
   })
   
   output$plot2 = renderPlot({
     data()
     y=c("Grand Prize","1,000,000","50,000","100","100","7","7","4","4","Total")
     x=c(sum.5w.1r*GRANDPRIZE, sum.5w*1000000, sum.4w.1r*50000, sum.4w*100,sum.3w.1r*100, sum.3w*7, sum.2w.1r*7, sum.1w.1r*4, sum.1r*4,winnings)
-    barplot(x,las=2,names.arg=c("5W 1R","5W","4W 1R","4W","3W 1R","3W","2W 1R","1W 1R","1R","Total"),col=rainbow(10),main=paste("Ticket Winnings"),ylab="Money Won")
+    barplot(x,las=2,names.arg=c("5W 1R","5W","4W 1R","4W","3W 1R","3W","2W 1R","1W 1R","1R","Total"),col=rainbow(9),main=paste("Ticket Winnings"),ylab="Money Won")
   })
   
   output$plot3 = renderPlot({
     data()
     n = play()
-    barplot(c(2*n,winnings,abs(2*n-winnings)),col=c(44:46),names.arg=c("Spent on Tickets","Won","Lost"),ylab="Money")
+    barplot(c(2*n,winnings,abs(2*n-winnings)),col=c("green","red","gray"),names.arg=c("Spent on Tickets","Won","Lost"),ylab="Money")
   })
   
   output$text1 = renderPrint({
