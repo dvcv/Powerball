@@ -14,7 +14,6 @@ ui <- fluidPage(
   titlePanel("Summary"),
   textOutput("text2")
   
-  
 )
 
 
@@ -138,7 +137,7 @@ server <- function(input, output, session) {
   output$plot3 = renderPlot({
     data()
     n = play()
-    barplot(c(2*n,winnings,abs(2*n-winnings)),col=c("green","red","gray"),names.arg=c("Spent on Tickets","Won","Lost"),ylab="Money")
+    barplot(c(2*n,winnings,abs(2*n-winnings)),col=c("green","red","gray"),names.arg=c("Spent","Won","Lost"),ylab="Money")
   })
   
   output$text1 = renderPrint({

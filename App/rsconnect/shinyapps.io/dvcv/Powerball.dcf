@@ -1,8 +1,8 @@
 name: Powerball
 account: dvcv
 server: shinyapps.io
-bundleId: 541032
+bundleId: 542246
 url: https://dvcv.shinyapps.io/Powerball/
-when: 1472150725.19853
+when: 1472278447.79644
 asMultiple: FALSE
 asStatic: FALSE
