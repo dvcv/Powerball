@@ -10,8 +10,10 @@ ui <- fluidPage(
     sidebarPanel(
       textOutput("intro"),
       sliderInput("tickets", "Games", 1, 10400, 100,100),
-      numericInput("tickets2", NULL, 1, 1,10400,1),
+      numericInput("tickets2", NULL, 1, 1,10400,100),
       helpText("Note: Only values between 1 and 10400 are accepted."),
+      textOutput("grandPrize"),
+      sliderInput("jackpot", "Jackpot", 60000000, 1000000000, 100000000,1000000),
       actionButton("play", "Play")
     ),mainPanel(tabsetPanel(
       tabPanel("Win Loss Comparison",plotOutput("plot1")),
@@ -22,7 +24,7 @@ ui <- fluidPage(
       tabPanel("Summary",verbatimTextOutput("text2"))
       
    )
-  ,"        ")
+  )
  )
 )
 
@@ -35,12 +37,17 @@ server <- function(input, output, session) {
   
   observe({
     updateSliderInput(session,"tickets",value=input$tickets2)
+
+    
+    GRANDPRIZE <<- input$jackpot
   })
+  
+  
   
   play <- eventReactive(input$play, {
     input$tickets
   })
-  GRANDPRIZE=60000000
+  GRANDPRIZE=100000000
   win.ticket=0
   winnings=0
   sum.5w.1r=0
