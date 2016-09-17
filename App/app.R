@@ -9,7 +9,7 @@ ui <- fluidPage(
     
     sidebarPanel(
       textOutput("intro"),
-      sliderInput("tickets", "Games", 1, 10400, 100,100),
+      sliderInput("tickets", "Games", 1, 10400, 1,100),
       numericInput("tickets2", NULL, 1, 1,10400,100),
       helpText("Note: Only values between 1 and 10400 are accepted."),
       textOutput("grandPrize"),
@@ -37,12 +37,11 @@ server <- function(input, output, session) {
   
   observe({
     updateSliderInput(session,"tickets",value=input$tickets2)
-
-    
-    GRANDPRIZE <<- input$jackpot
   })
   
-  
+  observe({
+    GRANDPRIZE <<- input$jackpot
+  })
   
   play <- eventReactive(input$play, {
     input$tickets
