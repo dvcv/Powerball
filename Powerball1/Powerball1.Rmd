@@ -5,7 +5,7 @@ date: "January 21, 2016"
 output: pdf_document
 ---
 ```{r, echo=FALSE}
-n=as.integer(10000) ## Change the amount of tickets bought here
+n=as.integer(1000000) ## Change the amount of tickets bought here
 
 ```
 ##WHY MILLIONAIRES DO NOT PLAY POWERBALL
@@ -231,8 +231,8 @@ cat(  " You spent $", as.integer(2*n),"and won $", as.integer(winnings),"", "\n"
 ```
  
  **Appendix** 
- List of all winning tickets.
-```{r, echo=FALSE}
-win.ticket
-```
+## List of all winning tickets.
+##```{r, echo=FALSE}
+##win.ticket
+##```
 **do to the way the code was written duplicate tickets are possible but highly unlikely
