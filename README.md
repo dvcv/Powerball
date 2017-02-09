@@ -12,7 +12,7 @@ Here you will find four folders.
 3. Powerball3: Why powerball ticket (1,2,3,4,5,+6) has the same odds as a quickpick    
   -Powerball3.pdf  
   -Powerball3.Rmd  
-4. App: Contains an interactive app that was created with Shiny  
+4. ShinyApp: Contains an interactive app that was created with Shiny and it also includes the with the code. 
 
   
 Pdf files contain my output from the Rmd files. If you would like to run your own simulation using my code open the Rmd files. Make sure you also have R Studio intstalled on your computer. Or you can check out the link in the App folder to use an interactive simimulator.   
